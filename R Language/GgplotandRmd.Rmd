@@ -1,0 +1,50 @@
+---
+title: "ggplot_and_rmd"
+author: "Gunavardhan"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+## Loading Required Packages
+Here we will load the 'Tidyverse' and 'palmer penguins' packages.
+```{r Loading Packages}
+library(tidyverse)
+library(palmerpenguins)
+library(dplyr)
+library(ggplot2)
+```
+
+## Loading the dataset and storing it as a dataframe
+```{r Loading Dataset}
+data(penguins)
+df = penguins
+```
+
+## Viewing dataframe
+```{r}
+View(df)
+```
+
+## The first few name of all columns of dataframe
+```{r}
+head(df)
+colnames(df)
+```
+## Species and Islands
+```{r}
+df %>% 
+  distinct(species)
+
+df %>% 
+  distinct(island)
+
+df %>% 
+  n_distinct(.$species)
+```
+## Visualizing Relationship between flipperlength and body mass
+```{r}
+ggplot(data = df, mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+  geom_point() + 
+  geom_smooth()
+```
+
